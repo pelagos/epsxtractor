@@ -1,6 +1,9 @@
 ﻿// test
 // test from mono
 
+//#define MONO
+//#define WINDOWS
+
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -12,23 +15,32 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace epsxtractor
 {
     public partial class Main : Form
     {
         private List<DriveInfo> driveInfoList = new List<DriveInfo>();
-        private List<DirectoryInfo> dirInfoList = new List<DirectoryInfo>();
+        //private List<DirectoryInfo> dirInfoList = new List<DirectoryInfo>();
 
         public Main()
         {
             InitializeComponent();
 
+			#if __MonoCS__
+
+			#else
 
             DirectoryInfo dir = new DirectoryInfo(@"C:\test");
             foreach (var files in dir.GetFiles())
             {
                 textBox2.Text += ("Filename: " + files.Name + "\r\n");
             }
+
+			#endif
+
+
             //DirectoryInfo dir = new DirectoryInfo(@"C:\test");
             //foreach (var files in dir.GetFiles())
             //{
